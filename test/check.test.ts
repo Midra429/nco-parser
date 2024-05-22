@@ -1,7 +1,6 @@
 import { describe, test, expect } from '@jest/globals'
-import compare from 'just-compare'
 
-import { extractor, normalizerAll } from '../src'
+import { normalizerAll, compare } from '../src'
 import { season as extractSeason } from '../src/extractor/lib/season'
 import { episode as extractEpisode } from '../src/extractor/lib/episode'
 
@@ -13,25 +12,7 @@ describe('check', () => {
     const normalizedA = normalizerAll(TITLE_A, { space: false })
     const normalizedB = normalizerAll(TITLE_B, { space: false })
 
-    expect(compare(normalizedA, normalizedB)).toBe(true)
-  })
-
-  test('extractor (season): 魔法科高校3', () => {
-    const TITLE_A = '魔法科高校の劣等生 第3シーズン 01「ダブル・セブン編Ⅰ」'
-    const TITLE_B = '魔法科高校の劣等生 3期 01 ダブル・セブン編Ⅰ'
-
-    const normalizedA = normalizerAll(TITLE_A, { space: false })
-    const normalizedB = normalizerAll(TITLE_B, { space: false })
-
-    const extractedSeasonA = extractSeason(normalizedA)
-    const extractedSeasonB = extractSeason(normalizedB)
-
-    expect(
-      compare(
-        extractedSeasonA.every((v, i, a) => v.number === a.at(i - 1)!.number),
-        extractedSeasonB.every((v, i, a) => v.number === a.at(i - 1)!.number)
-      )
-    ).toBe(true)
+    expect(normalizedA === normalizedB).toBe(true)
   })
 
   test('extractor (episode): ダンジョン飯', () => {
@@ -41,15 +22,10 @@ describe('check', () => {
     const normalizedA = normalizerAll(TITLE_A, { space: false })
     const normalizedB = normalizerAll(TITLE_B, { space: false })
 
-    const extractedEpisodeA = extractEpisode(normalizedA)
-    const extractedEpisodeB = extractEpisode(normalizedB)
+    const { number: epNumA } = extractEpisode(normalizedA)[0]
+    const { number: epNumB } = extractEpisode(normalizedB)[0]
 
-    expect(
-      compare(
-        extractedEpisodeA.every((v, i, a) => v.number === a.at(i - 1)!.number),
-        extractedEpisodeB.every((v, i, a) => v.number === a.at(i - 1)!.number)
-      )
-    ).toBe(true)
+    expect(epNumA === epNumB).toBe(true)
   })
 
   test('extractor (episode): Lv2チート', () => {
@@ -61,41 +37,33 @@ describe('check', () => {
     const normalizedA = normalizerAll(TITLE_A, { space: false })
     const normalizedB = normalizerAll(TITLE_B, { space: false })
 
-    const extractedEpisodeA = extractEpisode(normalizedA)
-    const extractedEpisodeB = extractEpisode(normalizedB)
+    const { number: epNumA } = extractEpisode(normalizedA)[0]
+    const { number: epNumB } = extractEpisode(normalizedB)[0]
 
-    expect(compare(extractedEpisodeA, extractedEpisodeB)).toBe(true)
+    expect(epNumA === epNumB).toBe(true)
   })
 
-  test('extractor', (done) => {
-    const TITLE =
-      '妖怪ウォッチ　第12話　「妖怪おならず者」 「じんめん犬シーズン２ 犬脱走 Episode1」 「コマさん～はじめてのケータイ編～」'
-    // const TITLE = '魔法科高校の劣等生 第3シーズン 01「ダブル・セブン編Ⅰ」'
-    // const TITLE_A = '陰の実力者になりたくて！ 2nd season #01「無法都市」'
-    // const TITLE_B = '陰の実力者になりたくて！ 2nd season(第2期) #01 無法都市'
+  test('extractor (season): Lv2チート', () => {
+    const TITLE_A = '魔法科高校の劣等生 第3シーズン 01「ダブル・セブン編Ⅰ」'
+    const TITLE_B = '魔法科高校の劣等生 3期 01 ダブル・セブン編Ⅰ'
 
-    const extracted = extractor(TITLE)
-    const { normalized, season, episode, workTitle, subTitle } = extracted
+    const normalizedA = normalizerAll(TITLE_A, { space: false })
+    const normalizedB = normalizerAll(TITLE_B, { space: false })
 
-    console.log(extracted)
+    const { number: seasonNumA } = extractSeason(normalizedA)[0]
+    const { number: seasonNumB } = extractSeason(normalizedB)[0]
 
-    const fragments: string[] = []
+    expect(seasonNumA === seasonNumB).toBe(true)
+  })
 
-    if (episode && workTitle && subTitle) {
-      fragments.push(workTitle)
+  test('compare: 魔法科高校3', () => {
+    const TITLE_1_A = '魔法科高校の劣等生 第3シーズン 01「ダブル・セブン編Ⅰ」'
+    const TITLE_1_B = '魔法科高校の劣等生 3期 01 ダブル・セブン編Ⅰ'
 
-      if (season) {
-        fragments.push(`${season.number}期`)
-      }
+    const TITLE_2_A = '陰の実力者になりたくて！ 2nd season #01「無法都市」'
+    const TITLE_2_B = '陰の実力者になりたくて！ 2nd season(第2期) #01 無法都市'
 
-      fragments.push(`${episode.number}話`)
-      fragments.push(subTitle)
-    }
-
-    const title = fragments.join(' ')
-
-    console.log('extractor: title:', title)
-
-    done()
+    expect(compare(TITLE_1_A, TITLE_1_B)).toBe(true)
+    expect(compare(TITLE_2_A, TITLE_2_B)).toBe(true)
   })
 })
