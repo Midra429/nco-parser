@@ -32,7 +32,7 @@ export const extractor = (rawText: string) => {
     normalized,
     season,
     episode,
-    workTitle: workTitle && normalizer(workTitle, { symbol: true }),
-    subTitle: subTitle && normalizer(subTitle, { symbol: true }),
+    workTitle: workTitle || null,
+    subTitle: subTitle || null,
   }
 }
