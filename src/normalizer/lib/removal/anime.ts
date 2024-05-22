@@ -1,4 +1,8 @@
-export const REGEXPS = [/^(tv|テレビ)?アニメ(ーション)?\s+/i, /\s+本編$/]
+export const REGEXPS = [
+  /^(tv|テレビ)?アニメ(ーション)?\s+/i,
+  /(?<=^\S+)\sthe\sanimation(?=[^a-z]|$)/i,
+  /\s+本編$/,
+]
 
 export const anime = (str: string): string => {
   for (const re of REGEXPS) {
