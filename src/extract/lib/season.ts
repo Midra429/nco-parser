@@ -14,7 +14,7 @@ export const REGEXPS = [
   `(?<prefix>season\\s?)(?<number>${TEMPLATE_REGEXP_NUM})`,
 
   // 2nd season
-  `(?<number>${TEMPLATE_REGEXP_NUM})(?<suffix>(?:st|nd|th)\\sseason)`,
+  `(?<number>${TEMPLATE_REGEXP_NUM})(?<suffix>(?:st|nd|rd|th)\\sseason)`,
 ].map((v) => new RegExp(v, 'dgi'))
 
 export const season = (str: string) => core(str, REGEXPS)
