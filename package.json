@@ -41,15 +41,20 @@
       "import": "./dist/utils/*.js",
       "default": "./dist/utils/*.js"
     },
-    "./normalizer/*": {
-      "types": "./dist/normalizer/*.d.ts",
-      "import": "./dist/normalizer/*.js",
-      "default": "./dist/normalizer/*.js"
+    "./normalize/*": {
+      "types": "./dist/normalize/*.d.ts",
+      "import": "./dist/normalize/*.js",
+      "default": "./dist/normalize/*.js"
     },
-    "./extractor/*": {
-      "types": "./dist/extractor/*.d.ts",
-      "import": "./dist/extractor/*.js",
-      "default": "./dist/extractor/*.js"
+    "./extract/*": {
+      "types": "./dist/extract/*.d.ts",
+      "import": "./dist/extract/*.js",
+      "default": "./dist/extract/*.js"
+    },
+    "./compare/*": {
+      "types": "./dist/compare/*.d.ts",
+      "import": "./dist/compare/*.js",
+      "default": "./dist/compare/*.js"
     }
   },
   "dependencies": {
