@@ -1,5 +1,5 @@
 export const REGEXPS = [
-  /コメント専用(動画)?|szbh方式/gi,
+  /コメント専?用(動画)?|szbh方式/gi,
   /\s+(dvd|(blu[\s\-]?ray|ブルーレイ))用|dvd\/(blu[\s\-]?ray|ブルーレイ)用?/gi,
 ]
 
