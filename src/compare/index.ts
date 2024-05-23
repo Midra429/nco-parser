@@ -1,17 +1,17 @@
-import { normalizerAll } from '../normalizer'
-import { extractor } from '../extractor'
+import { normalizeAll } from '../normalize'
+import { extract } from '../extract'
 
 export const compare = (
   titleA: string,
   titleB: string,
   weak: boolean = true
 ): boolean => {
-  if (normalizerAll(titleA) === normalizerAll(titleB)) {
+  if (normalizeAll(titleA) === normalizeAll(titleB)) {
     return true
   }
 
-  const extractedA = extractor(titleA)
-  const extractedB = extractor(titleB)
+  const extractedA = extract(titleA)
+  const extractedB = extract(titleB)
 
   if (
     extractedA.workTitle === extractedB.workTitle &&

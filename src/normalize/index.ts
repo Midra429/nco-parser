@@ -1,7 +1,7 @@
-import * as normalize from './lib/normalize'
-import * as removal from './lib/removal'
+import * as adjust from './lib/adjust'
+import * as remove from './lib/remove'
 
-export const normalizer = (
+export const normalize = (
   str: string,
   option: {
     /** オプション全て */
@@ -21,16 +21,16 @@ export const normalizer = (
    ******************************/
 
   // 全角半角
-  str = normalize.charWidth(str)
+  str = adjust.charWidth(str)
 
   // 空白
-  str = normalize.space(str)
+  str = adjust.space(str)
 
   // 記号
-  str = normalize.symbol(str)
+  str = adjust.symbol(str)
 
   // ローマ数字
-  str = normalize.romanNum(str)
+  str = adjust.romanNum(str)
 
   // 小文字
   str = str.toLowerCase()
@@ -41,29 +41,29 @@ export const normalizer = (
 
   // 括弧
   if (option.bracket || (option.bracket !== false && option.all)) {
-    str = removal.bracket(str)
+    str = remove.bracket(str)
   }
 
   // 記号
   if (option.symbol || (option.symbol !== false && option.all)) {
-    str = removal.symbol(str)
+    str = remove.symbol(str)
   }
 
   // アニメ
-  str = removal.anime(str)
+  str = remove.anime(str)
 
   // 映画
-  str = removal.movie(str)
+  str = remove.movie(str)
 
   // コメント専用動画
-  str = removal.szbh(str)
+  str = remove.szbh(str)
 
   // 動画配信サービス
-  str = removal.vod(str)
+  str = remove.vod(str)
 
   // スペース
   if (option.space || (option.space !== false && option.all)) {
-    str = removal.space(str)
+    str = remove.space(str)
   }
   // 連続したスペースを1文字に
   else {
@@ -73,6 +73,6 @@ export const normalizer = (
   return str.trim()
 }
 
-export const normalizerAll = (...args: Parameters<typeof normalizer>) => {
-  return normalizer(args[0], { ...(args[1] ?? {}), all: true })
+export const normalizeAll = (...args: Parameters<typeof normalize>) => {
+  return normalize(args[0], { ...(args[1] ?? {}), all: true })
 }

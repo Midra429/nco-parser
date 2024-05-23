@@ -1,3 +1,3 @@
-export * from './normalizer'
-export * from './extractor'
+export * from './normalize'
+export * from './extract'
 export * from './compare'

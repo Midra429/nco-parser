@@ -1,9 +1,9 @@
-import { normalizer } from '../normalizer'
+import { normalize } from '../normalize'
 import { season as extractSeason } from './lib/season'
 import { episode as extractEpisode } from './lib/episode'
 
-export const extractor = (rawText: string) => {
-  const normalized = normalizer(rawText, { bracket: true })
+export const extract = (rawText: string) => {
+  const normalized = normalize(rawText, { bracket: true })
 
   const seasons = extractSeason(normalized)
   const episodes = extractEpisode(normalized)
