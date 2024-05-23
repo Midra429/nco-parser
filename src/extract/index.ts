@@ -20,7 +20,10 @@ export const extract = (rawText: string) => {
     subTitle = normalized.slice(episode.range[1] + 1).trim()
   }
 
-  if (seasons.every((v, i, a) => v.number === a.at(i - 1)!.number)) {
+  if (
+    0 < seasons.length &&
+    seasons.every((v, i, a) => v.number === a.at(i - 1)!.number)
+  ) {
     if (!episode || seasons.every((v) => v.range[1] < episode.range[0])) {
       season = seasons[0]
 
