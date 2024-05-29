@@ -1,6 +1,6 @@
 {
   "name": "@midra/nco-parser",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "description": "NCOverlay用のアニメタイトル解析ライブラリ",
   "author": "Midra <me@midra.me> (https://github.com/Midra429)",
   "license": "MIT",
