@@ -13,7 +13,7 @@ export const extract = (rawText: string) => {
   let workTitle: string | null = null
   let subTitle: string | null = null
 
-  if (0 < episodes.length) {
+  if (episodes.length) {
     episode = episodes[0]
 
     workTitle = normalized.slice(0, episode.range[0]).trim()
@@ -21,7 +21,7 @@ export const extract = (rawText: string) => {
   }
 
   if (
-    0 < seasons.length &&
+    seasons.length &&
     seasons.every((v, i, a) => v.number === a.at(i - 1)!.number)
   ) {
     if (!episode || seasons.every((v) => v.range[1] < episode.range[0])) {
