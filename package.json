@@ -14,6 +14,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc",
+    "postbuild": "node scripts/update-exports.cjs",
     "prepublish": "pnpm build",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
@@ -36,25 +37,20 @@
       "import": "./dist/*/index.js",
       "default": "./dist/*/index.js"
     },
-    "./utils/*": {
-      "types": "./dist/utils/*.d.ts",
-      "import": "./dist/utils/*.js",
-      "default": "./dist/utils/*.js"
+    "./extract/*": {
+      "types": "./dist/extract/*.d.ts",
+      "import": "./dist/extract/*.js",
+      "default": "./dist/extract/*.js"
     },
     "./normalize/*": {
       "types": "./dist/normalize/*.d.ts",
       "import": "./dist/normalize/*.js",
       "default": "./dist/normalize/*.js"
     },
-    "./extract/*": {
-      "types": "./dist/extract/*.d.ts",
-      "import": "./dist/extract/*.js",
-      "default": "./dist/extract/*.js"
-    },
-    "./compare/*": {
-      "types": "./dist/compare/*.d.ts",
-      "import": "./dist/compare/*.js",
-      "default": "./dist/compare/*.js"
+    "./utils/*": {
+      "types": "./dist/utils/*.d.ts",
+      "import": "./dist/utils/*.js",
+      "default": "./dist/utils/*.js"
     }
   },
   "dependencies": {
