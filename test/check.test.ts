@@ -15,7 +15,7 @@ describe('check', () => {
     expect(normalizedA === normalizedB).toBe(true)
   })
 
-  test('extract (episode): ダンジョン飯', () => {
+  test('extract (episode 1): ダンジョン飯', () => {
     const TITLE_A = 'ダンジョン飯 エピソード19'
     const TITLE_B = 'ダンジョン飯　第１９話　「山姥／夢魔」'
 
@@ -28,7 +28,7 @@ describe('check', () => {
     expect(epNumA === epNumB).toBe(true)
   })
 
-  test('extract (episode): Lv2チート', () => {
+  test('extract (episode 2): Lv2チート', () => {
     const TITLE_A =
       'Lv2からチートだった元勇者候補のまったり異世界ライフ episode.6「光と闇の魔人ヒヤ」'
     const TITLE_B =
@@ -41,6 +41,27 @@ describe('check', () => {
     const { number: epNumB } = extractEpisode(normalizedB)[0]
 
     expect(epNumA === epNumB).toBe(true)
+  })
+
+  test('extract (episode 3): Lv2チート', () => {
+    const TITLE_A = 'うらら迷路帖 一占 少女と占い、時々おなか'
+    const TITLE_B =
+      'ご注文はうさぎですか？？ 第1羽 笑顔とフラッシュがやかましい　これが私の自称姉です'
+    const TITLE_C =
+      '私がモテないのはどう考えてもお前らが悪い！ 喪1 モテないし、ちょっとイメチェンするわ'
+
+    const extractedA = ncoParser.extract(TITLE_A)
+    const extractedB = ncoParser.extract(TITLE_B)
+    const extractedC = ncoParser.extract(TITLE_C)
+
+    console.log('extractedA', extractedA)
+    console.log('extractedB', extractedB)
+    console.log('extractedC', extractedC)
+
+    expect(
+      extractedA.episode?.number === extractedB.episode?.number &&
+        extractedA.episode?.number === extractedC.episode?.number
+    ).toBe(true)
   })
 
   test('extract (season): Lv2チート', () => {
