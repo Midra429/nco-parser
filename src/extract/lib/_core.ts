@@ -1,7 +1,9 @@
 import { number2kanji, kanji2number } from '@geolonia/japanese-numeral'
 
-export const TEMPLATE_REGEXP_NUM = '\\d+(?:\\.\\d+)?'
-export const TEMPLATE_REGEXP_KANSUJI = '[〇一二三四五六七八九十百千万]+'
+export const NUMBER = '\\d'
+export const KANSUJI = '〇一二三四五六七八九十百千万'
+export const TEMPLATE_REGEXP_NUM = `${NUMBER}+(?:\\.${NUMBER}+)?`
+export const TEMPLATE_REGEXP_KANSUJI = `[${KANSUJI}]+`
 
 const REGEXP_NUM = new RegExp(TEMPLATE_REGEXP_NUM)
 const REGEXP_KANSUJI = new RegExp(TEMPLATE_REGEXP_KANSUJI)
