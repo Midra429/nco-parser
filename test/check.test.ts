@@ -71,10 +71,26 @@ describe('check', () => {
     const normalizedA = ncoParser.normalizeAll(TITLE_A, { space: false })
     const normalizedB = ncoParser.normalizeAll(TITLE_B, { space: false })
 
-    const { number: seasonNumA } = extractSeason(normalizedA)[0]
-    const { number: seasonNumB } = extractSeason(normalizedB)[0]
+    const extractedA = extractSeason(normalizedA)[0]
+    const extractedB = extractSeason(normalizedB)[0]
 
-    expect(seasonNumA === seasonNumB).toBe(true)
+    expect(extractedA.number === extractedB.number).toBe(true)
+  })
+
+  test('extract (season2): ヒロアカ7', () => {
+    const TITLE_A = '僕のヒーローアカデミア　第7期 第144話 DIVISION'
+    const TITLE_B = '僕のヒーローアカデミア(第7期)'
+
+    const normalizedA = ncoParser.normalizeAll(TITLE_A, { space: false })
+    const normalizedB = ncoParser.normalizeAll(TITLE_B, { space: false })
+
+    const extractedA = ncoParser.extract(normalizedA)
+    const extractedB = ncoParser.extract(normalizedB)
+
+    console.log('extractedA', extractedA)
+    console.log('extractedB', extractedB)
+
+    expect(extractedA.season?.number === extractedB.season?.number).toBe(true)
   })
 
   test('compare', () => {
