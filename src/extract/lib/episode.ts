@@ -25,8 +25,8 @@ export const REGEXPS = [
   /(?<!(?:season|episode|ep)\s)(?<=\s)(?<number>0?[0-9]{2}|[1-9][0-9]{2})(?=(?:\s\S+)?$)/,
 
   // <タイトル> (一占 | 第一羽 | 第1憑目 | 喪1) <サブタイトル>
-  `(?<=^(?:.+\\s))(?<prefix>[^${NUMBER}${KANSUJI}]+)(?<number>${NUM_KANSUJI})(?<suffix>[^${NUMBER}${KANSUJI}]*)(?=(?:\\s.+)$)`,
-  `(?<=^(?:.+\\s))(?<prefix>[^${NUMBER}${KANSUJI}]*)(?<number>${NUM_KANSUJI})(?<suffix>[^${NUMBER}${KANSUJI}]+)(?=(?:\\s.+)$)`,
+  `(?<=^(?:.+\\s))(?<prefix>[^${NUMBER}${KANSUJI}\\s]+)(?<number>${NUM_KANSUJI})(?<suffix>[^${NUMBER}${KANSUJI}\\s]*)(?=(?:\\s.+)$)`,
+  `(?<=^(?:.+\\s))(?<prefix>[^${NUMBER}${KANSUJI}\\s]*)(?<number>${NUM_KANSUJI})(?<suffix>[^${NUMBER}${KANSUJI}\\s]+)(?=(?:\\s.+)$)`,
 ].map((v) => new RegExp(v, 'dgi'))
 
 export const episode = (str: string) => core(str, REGEXPS)
