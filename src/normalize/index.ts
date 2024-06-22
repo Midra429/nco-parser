@@ -30,7 +30,7 @@ export const normalize = (
   str = adjust.symbol(str)
 
   // ローマ数字
-  str = adjust.romanNum(str)
+  // str = adjust.romanNum(str)
 
   // 小文字
   str = str.toLowerCase()
