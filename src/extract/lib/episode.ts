@@ -18,6 +18,9 @@ export const REGEXPS = [
   // episode1, ep 1, episode.1, ep:01, episode|1
   `(?<=[^a-z])(?<prefix>(?:episode|ep)[\\s\\.:|]?)(?<number>${TEMPLATE_REGEXP_NUM})`,
 
+  // chapter1
+  `(?<=[^a-z])(?<prefix>(?:chapter)[\\s\\.]?)(?<number>${TEMPLATE_REGEXP_NUM})`,
+
   // #01
   `(?<prefix>#)(?<number>${TEMPLATE_REGEXP_NUM})`,
 
