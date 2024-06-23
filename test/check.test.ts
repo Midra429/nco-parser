@@ -49,18 +49,23 @@ describe('check', () => {
       'ご注文はうさぎですか？？ 第1羽 笑顔とフラッシュがやかましい　これが私の自称姉です'
     const TITLE_C =
       '私がモテないのはどう考えてもお前らが悪い！ 喪1 モテないし、ちょっとイメチェンするわ'
+    const TITLE_D =
+      'ツンデレ悪役令嬢リーゼロッテと実況の遠藤くんと解説の小林さん chapter 1 ツンデレと王子と天の声'
 
     const extractedA = ncoParser.extract(TITLE_A)
     const extractedB = ncoParser.extract(TITLE_B)
     const extractedC = ncoParser.extract(TITLE_C)
+    const extractedD = ncoParser.extract(TITLE_D)
 
     console.log('extractedA', extractedA)
     console.log('extractedB', extractedB)
     console.log('extractedC', extractedC)
+    console.log('extractedD', extractedD)
 
     expect(
       extractedA.episode?.number === extractedB.episode?.number &&
-        extractedA.episode?.number === extractedC.episode?.number
+        extractedA.episode?.number === extractedC.episode?.number &&
+        extractedA.episode?.number === extractedD.episode?.number
     ).toBe(true)
   })
 
