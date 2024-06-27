@@ -1,4 +1,4 @@
-const DECIMAL_ROMAN_PAIRS: [number, string][] = [
+const DECIMAL_ROMAN_PAIRS = [
   [1000, 'M'],
   [900, 'CM'],
   [500, 'D'],
@@ -12,7 +12,7 @@ const DECIMAL_ROMAN_PAIRS: [number, string][] = [
   [5, 'V'],
   [4, 'IV'],
   [1, 'I'],
-]
+] as const
 
 /**
  * 数字 → ローマ数字
@@ -34,5 +34,13 @@ export const numToRoman = (num: number, lower: boolean = false): string => {
     }
   }
 
-  return (lower ? result.toLowerCase() : result) || num.toString()
+  if (!result) {
+    return num.toString()
+  }
+
+  if (lower) {
+    return result.toLowerCase()
+  }
+
+  return result
 }

@@ -9,5 +9,5 @@ export const symbol = (str: string): string => {
 
   str = str.replaceAll('|', ' ')
 
-  return str.trim()
+  return str.replace(/\s+/g, ' ').trim()
 }

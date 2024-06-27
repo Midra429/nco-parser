@@ -1,5 +1,6 @@
 export { bracket } from './bracket'
 export { symbol } from './symbol'
+export { romanNum } from './romanNum'
 export { space } from './space'
 export { anime } from './anime'
 export { movie } from './movie'

@@ -9,8 +9,16 @@ describe('check', () => {
     const TITLE_A = 'お兄ちゃんはおしまい！ ＃０１「まひろとイケないカラダ」'
     const TITLE_B = 'お兄ちゃんはおしまい！ #01 まひろとイケないカラダ'
 
-    const normalizedA = ncoParser.normalizeAll(TITLE_A, { space: false })
-    const normalizedB = ncoParser.normalizeAll(TITLE_B, { space: false })
+    const normalizedA = ncoParser.normalizeAll(TITLE_A, {
+      remove: {
+        space: false,
+      },
+    })
+    const normalizedB = ncoParser.normalizeAll(TITLE_B, {
+      remove: {
+        space: false,
+      },
+    })
 
     expect(normalizedA === normalizedB).toBe(true)
   })
@@ -19,8 +27,16 @@ describe('check', () => {
     const TITLE_A = 'ダンジョン飯 エピソード19'
     const TITLE_B = 'ダンジョン飯　第１９話　「山姥／夢魔」'
 
-    const normalizedA = ncoParser.normalizeAll(TITLE_A, { space: false })
-    const normalizedB = ncoParser.normalizeAll(TITLE_B, { space: false })
+    const normalizedA = ncoParser.normalizeAll(TITLE_A, {
+      remove: {
+        space: false,
+      },
+    })
+    const normalizedB = ncoParser.normalizeAll(TITLE_B, {
+      remove: {
+        space: false,
+      },
+    })
 
     const { number: epNumA } = extractEpisode(normalizedA)[0]
     const { number: epNumB } = extractEpisode(normalizedB)[0]
@@ -34,8 +50,16 @@ describe('check', () => {
     const TITLE_B =
       'Lv2からチートだった元勇者候補のまったり異世界ライフ　episode.6　光と闇の魔人ヒヤ'
 
-    const normalizedA = ncoParser.normalizeAll(TITLE_A, { space: false })
-    const normalizedB = ncoParser.normalizeAll(TITLE_B, { space: false })
+    const normalizedA = ncoParser.normalizeAll(TITLE_A, {
+      remove: {
+        space: false,
+      },
+    })
+    const normalizedB = ncoParser.normalizeAll(TITLE_B, {
+      remove: {
+        space: false,
+      },
+    })
 
     const { number: epNumA } = extractEpisode(normalizedA)[0]
     const { number: epNumB } = extractEpisode(normalizedB)[0]
@@ -73,8 +97,16 @@ describe('check', () => {
     const TITLE_A = '魔法科高校の劣等生 第3シーズン 01「ダブル・セブン編Ⅰ」'
     const TITLE_B = '魔法科高校の劣等生 3期 01 ダブル・セブン編Ⅰ'
 
-    const normalizedA = ncoParser.normalizeAll(TITLE_A, { space: false })
-    const normalizedB = ncoParser.normalizeAll(TITLE_B, { space: false })
+    const normalizedA = ncoParser.normalizeAll(TITLE_A, {
+      remove: {
+        space: false,
+      },
+    })
+    const normalizedB = ncoParser.normalizeAll(TITLE_B, {
+      remove: {
+        space: false,
+      },
+    })
 
     const extractedA = extractSeason(normalizedA)[0]
     const extractedB = extractSeason(normalizedB)[0]
@@ -86,8 +118,16 @@ describe('check', () => {
     const TITLE_A = '僕のヒーローアカデミア　第7期 第144話 DIVISION'
     const TITLE_B = '僕のヒーローアカデミア(第7期)'
 
-    const normalizedA = ncoParser.normalizeAll(TITLE_A, { space: false })
-    const normalizedB = ncoParser.normalizeAll(TITLE_B, { space: false })
+    const normalizedA = ncoParser.normalizeAll(TITLE_A, {
+      remove: {
+        space: false,
+      },
+    })
+    const normalizedB = ncoParser.normalizeAll(TITLE_B, {
+      remove: {
+        space: false,
+      },
+    })
 
     const extractedA = ncoParser.extract(normalizedA)
     const extractedB = ncoParser.extract(normalizedB)

@@ -1,18 +1,42 @@
 import * as adjust from './lib/adjust'
 import * as remove from './lib/remove'
 
-export const normalize = (
-  str: string,
-  option: {
+type NromalizeOptions = {
+  /**
+   * @default true
+   */
+  adjust?: {
+    /** 全角半角 */
+    charWidth?: boolean
+    /** 空白 */
+    space?: boolean
+    /** 記号 */
+    symbol?: boolean
+    /** ローマ数字 */
+    romanNum?: boolean
+    /** 大文字・小文字 */
+    letterCase?: 'upper' | 'lower'
+  }
+
+  /**
+   * @default false
+   */
+  remove?: {
     /** オプション全て */
     all?: boolean
-    /** 括弧除去 */
+
+    /** 括弧 */
     bracket?: boolean
-    /** 記号除去 */
+    /** 記号 */
     symbol?: boolean
-    /** スペース除去 */
+    /** スペース */
     space?: boolean
-  } = {}
+  }
+}
+
+export const normalize = (
+  str: string,
+  options: NromalizeOptions = {}
 ): string => {
   str = str.trim()
 
@@ -21,31 +45,51 @@ export const normalize = (
    ******************************/
 
   // 全角半角
-  str = adjust.charWidth(str)
+  if (options.adjust?.charWidth !== false) {
+    str = adjust.charWidth(str)
+  }
 
   // 空白
-  str = adjust.space(str)
+  if (options.adjust?.space !== false) {
+    str = adjust.space(str)
+  }
 
   // 記号
-  str = adjust.symbol(str)
+  if (options.adjust?.symbol !== false) {
+    str = adjust.symbol(str)
+  }
 
   // ローマ数字
-  // str = adjust.romanNum(str)
+  if (options.adjust?.romanNum !== false) {
+    str = adjust.romanNum(str)
+  }
 
+  // 大文字
+  if (options.adjust?.letterCase === 'upper') {
+    str = str.toUpperCase()
+  }
   // 小文字
-  str = str.toLowerCase()
+  else {
+    str = str.toLowerCase()
+  }
 
   /******************************
    * 除去
    ******************************/
 
   // 括弧
-  if (option.bracket || (option.bracket !== false && option.all)) {
+  if (
+    options.remove?.bracket ||
+    (options.remove?.bracket !== false && options.remove?.all)
+  ) {
     str = remove.bracket(str)
   }
 
   // 記号
-  if (option.symbol || (option.symbol !== false && option.all)) {
+  if (
+    options.remove?.symbol ||
+    (options.remove?.symbol !== false && options.remove?.all)
+  ) {
     str = remove.symbol(str)
   }
 
@@ -62,7 +106,10 @@ export const normalize = (
   str = remove.vod(str)
 
   // スペース
-  if (option.space || (option.space !== false && option.all)) {
+  if (
+    options.remove?.space ||
+    (options.remove?.space !== false && options.remove?.all)
+  ) {
     str = remove.space(str)
   }
   // 連続したスペースを1文字に
@@ -74,5 +121,8 @@ export const normalize = (
 }
 
 export const normalizeAll = (...args: Parameters<typeof normalize>) => {
-  return normalize(args[0], { ...(args[1] ?? {}), all: true })
+  return normalize(args[0], {
+    ...(args[1] ?? {}),
+    remove: { all: true },
+  })
 }

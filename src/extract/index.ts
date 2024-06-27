@@ -3,7 +3,11 @@ import { season as extractSeason } from './lib/season'
 import { episode as extractEpisode } from './lib/episode'
 
 export const extract = (rawText: string) => {
-  const normalized = normalize(rawText, { bracket: true })
+  const normalized = normalize(rawText, {
+    remove: {
+      bracket: true,
+    },
+  })
 
   let seasons = extractSeason(normalized)
   let episodes = extractEpisode(normalized)
