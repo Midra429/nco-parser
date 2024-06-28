@@ -1,5 +1,6 @@
 import { normalizeAll } from '../normalize'
 import { extract } from '../extract'
+import { similarity } from '../utils/similarity'
 
 export const compare = (
   titleA: string,
@@ -13,22 +14,62 @@ export const compare = (
   const extractedA = extract(titleA)
   const extractedB = extract(titleB)
 
+  if (!extractedA.workTitle || !extractedB.workTitle) {
+    return false
+  }
+
+  const normalizedWorkTitleA = normalizeAll(extractedA.workTitle)
+  const normalizedWorkTitleB = normalizeAll(extractedB.workTitle)
+
+  const normalizedSubTitleA =
+    extractedA.subTitle && normalizeAll(extractedA.subTitle)
+  const normalizedSubTitleB =
+    extractedB.subTitle && normalizeAll(extractedB.subTitle)
+
+  const isSameWorkTitle = normalizedWorkTitleA === normalizedWorkTitleB
+
+  const isSameSeasonNumber =
+    extractedA.season?.number === extractedB.season?.number
+
+  const isSameEpisodeNumber =
+    extractedA.episode?.number === extractedB.episode?.number
+
+  const isSameSubTitle = normalizedSubTitleA === normalizedSubTitleB
+
   if (
-    extractedA.workTitle === extractedB.workTitle &&
-    extractedA.subTitle === extractedB.subTitle &&
-    extractedA.season?.number === extractedB.season?.number &&
-    extractedA.episode?.number === extractedA.episode?.number
+    isSameWorkTitle &&
+    isSameSeasonNumber &&
+    isSameEpisodeNumber &&
+    isSameSubTitle
   ) {
     return true
   }
 
   if (weak) {
+    const isSimilarWorkTitle =
+      isSameWorkTitle ||
+      0.85 <= similarity(normalizedWorkTitleA, normalizedWorkTitleB)
+
+    const isSimilarSubTitle =
+      isSameSubTitle ||
+      (!!normalizedSubTitleA &&
+        !!normalizedSubTitleB &&
+        0.9 <= similarity(normalizedSubTitleA, normalizedSubTitleB))
+
     if (
+      isSimilarWorkTitle &&
+      isSameSeasonNumber &&
+      isSameEpisodeNumber &&
+      isSimilarSubTitle
+    ) {
+      return true
+    }
+
+    if (
+      isSimilarWorkTitle &&
       extractedA.episode &&
-      extractedB.episode &&
-      extractedA.workTitle === extractedB.workTitle &&
-      extractedA.season?.number === extractedB.season?.number &&
-      extractedA.episode.number === extractedB.episode.number
+      isSameEpisodeNumber &&
+      (isSameSeasonNumber || isSimilarSubTitle)
     ) {
       return true
     }
