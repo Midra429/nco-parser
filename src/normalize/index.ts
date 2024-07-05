@@ -123,6 +123,9 @@ export const normalize = (
 export const normalizeAll = (...args: Parameters<typeof normalize>) => {
   return normalize(args[0], {
     ...(args[1] ?? {}),
-    remove: { all: true },
+    remove: {
+      all: true,
+      ...(args[1] ? args[1].remove : {}),
+    },
   })
 }
