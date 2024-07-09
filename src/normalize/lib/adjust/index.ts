@@ -1,4 +1,5 @@
 export { charWidth } from './charWidth'
+export { dakuten, handakuten } from './dakuten'
 export { space } from './space'
 export { symbol } from './symbol'
 export { romanNum } from './romanNum'

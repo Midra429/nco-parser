@@ -8,6 +8,10 @@ type NromalizeOptions = {
   adjust?: {
     /** 全角半角 */
     charWidth?: boolean
+    /** 濁点 */
+    dakuten?: boolean
+    /** 半濁点 */
+    handakuten?: boolean
     /** 空白 */
     space?: boolean
     /** 記号 */
@@ -47,6 +51,16 @@ export const normalize = (
   // 全角半角
   if (options.adjust?.charWidth !== false) {
     str = adjust.charWidth(str)
+  }
+
+  // 濁点
+  if (options.adjust?.dakuten !== false) {
+    str = adjust.dakuten(str)
+  }
+
+  // 半濁点
+  if (options.adjust?.handakuten !== false) {
+    str = adjust.handakuten(str)
   }
 
   // 空白
