@@ -93,6 +93,16 @@ describe('check', () => {
     ).toBe(true)
   })
 
+  test('extract (episode 4): ウィストリア', () => {
+    const TITLE = '杖と剣のウィストリア シーズン1, 第ニ話 不屈のごとく'
+
+    const extracted = ncoParser.extract(TITLE)
+
+    console.log('extracted', extracted)
+
+    expect(extracted.episode?.number === 2).toBe(true)
+  })
+
   test('extract (season): Lv2チート', () => {
     const TITLE_A = '魔法科高校の劣等生 第3シーズン 01「ダブル・セブン編Ⅰ」'
     const TITLE_B = '魔法科高校の劣等生 3期 01 ダブル・セブン編Ⅰ'
