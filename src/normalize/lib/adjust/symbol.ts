@@ -34,6 +34,11 @@ const DOTS = [
   0x2e31, 0x2219, 0x10101, 0x30fb,
 ]
 
+const COMMAS = [
+  // コンマ
+  0x002c, 0xfe50, 0xff0c,
+]
+
 const EXCLAMATIONS = [
   // エクスクラメーション
   0x0021, 0x2d51, 0x01c3, 0xff01,
@@ -50,6 +55,7 @@ export const REGULAR_CHARS = {
   APOSTROPHE: "'",
   QUOTATION: '”',
   DOT: '･',
+  COMMA: ',',
   EXCLAMATION: '!',
   SLASH: '/',
 } as const
@@ -85,6 +91,10 @@ export const symbol = (str: string): string => {
       // ドット
       else if (DOTS.includes(cp)) {
         newChar = REGULAR_CHARS.DOT
+      }
+      // コンマ
+      else if (COMMAS.includes(cp)) {
+        newChar = REGULAR_CHARS.COMMA
       }
       // エクスクラメーション
       else if (EXCLAMATIONS.includes(cp)) {
