@@ -1,4 +1,4 @@
-import { splitString } from '../../../utils/string'
+import { splitString } from '../../../utils/string.js'
 
 const SYMBOLS: Record<string, string> = {
   '　': ' ',

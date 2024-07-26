@@ -1,8 +1,8 @@
 import { describe, test, expect } from '@jest/globals'
 
-import { ncoParser } from '../src'
-import { season as extractSeason } from '../src/extract/lib/season'
-import { episode as extractEpisode } from '../src/extract/lib/episode'
+import { ncoParser } from '../dist/index.js'
+import { season as extractSeason } from '../dist/extract/lib/season.js'
+import { episode as extractEpisode } from '../dist/extract/lib/episode.js'
 
 describe('check', () => {
   test('normalize: おにまい', () => {

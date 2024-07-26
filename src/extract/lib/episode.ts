@@ -4,7 +4,7 @@ import {
   TEMPLATE_REGEXP_NUM,
   TEMPLATE_REGEXP_KANSUJI,
   core,
-} from './_core'
+} from './_core.js'
 
 const NUM_KANSUJI = `${TEMPLATE_REGEXP_NUM}|${TEMPLATE_REGEXP_KANSUJI}`
 

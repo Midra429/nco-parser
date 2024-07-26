@@ -1,4 +1,4 @@
-import { TEMPLATE_REGEXP_NUM, TEMPLATE_REGEXP_KANSUJI, core } from './_core'
+import { TEMPLATE_REGEXP_NUM, TEMPLATE_REGEXP_KANSUJI, core } from './_core.js'
 
 export const REGEXPS = [
   // 第2期, ニ期

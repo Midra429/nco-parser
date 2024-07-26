@@ -1,6 +1,6 @@
-import { normalize } from '../normalize'
-import { season as extractSeason } from './lib/season'
-import { episode as extractEpisode } from './lib/episode'
+import { normalize } from '../normalize/index.js'
+import { season as extractSeason } from './lib/season.js'
+import { episode as extractEpisode } from './lib/episode.js'
 
 export const extract = (rawText: string) => {
   const normalized = normalize(rawText, {

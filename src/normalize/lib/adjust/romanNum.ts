@@ -1,5 +1,5 @@
-import { splitString } from '../../../utils/string'
-import { numToRoman } from '../../../utils/numToRoman'
+import { splitString } from '../../../utils/string.js'
+import { numToRoman } from '../../../utils/numToRoman.js'
 
 const DECIMAL_LCDM = [50, 100, 500, 1000]
 

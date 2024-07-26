@@ -1,4 +1,4 @@
-import { splitString } from '../../../utils/string'
+import { splitString } from '../../../utils/string.js'
 
 const spaces = [
   0x00a0, 0x2002, 0x2003, 0x2004, 0x2005, 0x2006, 0x2007, 0x2008, 0x2009,

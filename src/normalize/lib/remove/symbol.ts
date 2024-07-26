@@ -1,4 +1,4 @@
-import { REGULAR_CHARS as SYMBOL_REGULAR_CHARS } from '../adjust/symbol'
+import { REGULAR_CHARS as SYMBOL_REGULAR_CHARS } from '../adjust/symbol.js'
 
 export const CHARACTERS = Object.values(SYMBOL_REGULAR_CHARS)
 

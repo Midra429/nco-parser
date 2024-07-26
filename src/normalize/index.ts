@@ -1,5 +1,5 @@
-import * as adjust from './lib/adjust'
-import * as remove from './lib/remove'
+import * as adjust from './lib/adjust/index.js'
+import * as remove from './lib/remove/index.js'
 
 type NromalizeOptions = {
   /**

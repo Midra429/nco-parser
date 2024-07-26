@@ -1,6 +1,6 @@
-import { normalizeAll } from '../normalize'
-import { extract } from '../extract'
-import { similarity } from '../utils/similarity'
+import { normalizeAll } from '../normalize/index.js'
+import { extract } from '../extract/index.js'
+import { similarity } from '../utils/similarity.js'
 
 export const compare = (
   titleA: string,
