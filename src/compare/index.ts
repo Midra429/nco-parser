@@ -3,28 +3,28 @@ import { extract } from '../extract/index.js'
 import { similarity } from '../utils/similarity.js'
 
 export const compare = (
-  titleA: string,
-  titleB: string,
+  rawTextA: string,
+  rawTextB: string,
   weak: boolean = true
 ): boolean => {
-  if (normalizeAll(titleA) === normalizeAll(titleB)) {
+  if (normalizeAll(rawTextA) === normalizeAll(rawTextB)) {
     return true
   }
 
-  const extractedA = extract(titleA)
-  const extractedB = extract(titleB)
+  const extractedA = extract(rawTextA)
+  const extractedB = extract(rawTextB)
 
-  if (!extractedA.workTitle || !extractedB.workTitle) {
+  if (!extractedA.title || !extractedB.title) {
     return false
   }
 
-  const normalizedWorkTitleA = normalizeAll(extractedA.workTitle)
-  const normalizedWorkTitleB = normalizeAll(extractedB.workTitle)
+  const normalizedWorkTitleA = normalizeAll(extractedA.title)
+  const normalizedWorkTitleB = normalizeAll(extractedB.title)
 
   const normalizedSubTitleA =
-    extractedA.subTitle && normalizeAll(extractedA.subTitle)
+    extractedA.subtitle && normalizeAll(extractedA.subtitle)
   const normalizedSubTitleB =
-    extractedB.subTitle && normalizeAll(extractedB.subTitle)
+    extractedB.subtitle && normalizeAll(extractedB.subtitle)
 
   const isSameWorkTitle = normalizedWorkTitleA === normalizedWorkTitleB
 

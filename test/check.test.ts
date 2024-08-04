@@ -95,6 +95,7 @@ describe('check', () => {
 
   test('extract (episode 4): ウィストリア', () => {
     const TITLE = '杖と剣のウィストリア シーズン1, 第ニ話 不屈のごとく'
+    // const TITLE = 'ATRI -My Dear Moments- Log 03 「ヒットマン・ザコ・スクール」'
 
     const extracted = ncoParser.extract(TITLE)
 

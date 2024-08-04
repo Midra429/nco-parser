@@ -12,10 +12,10 @@ export const extract = (rawText: string) => {
   const seasons = extractSeason(normalized)
   let episodes = extractEpisode(normalized, false)
 
+  let title: string | null = null
   let season: (typeof seasons)[number] | null = null
   let episode: (typeof episodes)[number] | null = null
-  let workTitle: string | null = null
-  let subTitle: string | null = null
+  let subtitle: string | null = null
 
   let seasonLastIdx: number | null = null
 
@@ -24,7 +24,7 @@ export const extract = (rawText: string) => {
     seasons.every((v, i, a) => v.number === a.at(i - 1)!.number)
   ) {
     season = seasons[0]
-    workTitle = normalized.slice(0, season.range[0]).trim()
+    title = normalized.slice(0, season.range[0]).trim()
 
     seasonLastIdx = seasons.at(-1)!.range[1]
   }
@@ -35,8 +35,8 @@ export const extract = (rawText: string) => {
 
   if (episodes.length) {
     episode = episodes[0]
-    workTitle ||= normalized.slice(0, episode.range[0]).trim()
-    subTitle = normalized.slice(episode.range[1] + 1).trim()
+    title ||= normalized.slice(0, episode.range[0]).trim()
+    subtitle = normalized.slice(episode.range[1] + 1).trim()
   } else {
     episodes = extractEpisode(normalized)
 
@@ -46,16 +46,16 @@ export const extract = (rawText: string) => {
 
     if (episodes.length) {
       episode = episodes.at(-1)!
-      workTitle ||= normalized.slice(0, episode.range[0]).trim()
-      subTitle = normalized.slice(episode.range[1] + 1).trim()
+      title ||= normalized.slice(0, episode.range[0]).trim()
+      subtitle = normalized.slice(episode.range[1] + 1).trim()
     }
   }
 
   return {
     normalized,
+    title: title || null,
     season,
     episode,
-    workTitle: workTitle || null,
-    subTitle: subTitle || null,
+    subtitle: subtitle || null,
   }
 }

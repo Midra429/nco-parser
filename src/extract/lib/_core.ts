@@ -1,12 +1,11 @@
 import { number2kanji, kanji2number } from '@geolonia/japanese-numeral'
 
-export const NUMBER = '\\d'
-export const KANSUJI = '〇一二三四五六七八九十百千万'
-export const TEMPLATE_REGEXP_NUM = `${NUMBER}+(?:\\.${NUMBER}+)?`
-export const TEMPLATE_REGEXP_KANSUJI = `[${KANSUJI}]+`
-
-const REGEXP_NUM = new RegExp(TEMPLATE_REGEXP_NUM)
-const REGEXP_KANSUJI = new RegExp(TEMPLATE_REGEXP_KANSUJI)
+export const NUMBER = /\d/
+export const KANSUJI = /〇一二三四五六七八九十百千万/
+export const REGEXP_NUMBER = new RegExp(
+  `${NUMBER.source}+(?:\\.${NUMBER.source}+)?`
+)
+export const REGEXP_KANSUJI = new RegExp(`[${KANSUJI.source}]+`)
 
 /**
  * @param str 抽出対象の文字列
@@ -33,7 +32,7 @@ export const core = (str: string, regexps: RegExp[]) => {
       let number: number | null = null
       let kansuji: string | null = null
 
-      if (REGEXP_NUM.test(groups.number)) {
+      if (REGEXP_NUMBER.test(groups.number)) {
         number = Number(groups.number)
         kansuji = number2kanji(number)
       } else if (REGEXP_KANSUJI.test(groups.number)) {
