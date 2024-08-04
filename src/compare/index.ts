@@ -18,15 +18,15 @@ export const compare = (
     return false
   }
 
-  const normalizedWorkTitleA = normalizeAll(extractedA.title)
-  const normalizedWorkTitleB = normalizeAll(extractedB.title)
+  const normalizedTitleA = normalizeAll(extractedA.title)
+  const normalizedTitleB = normalizeAll(extractedB.title)
 
-  const normalizedSubTitleA =
+  const normalizedSubtitleA =
     extractedA.subtitle && normalizeAll(extractedA.subtitle)
-  const normalizedSubTitleB =
+  const normalizedSubtitleB =
     extractedB.subtitle && normalizeAll(extractedB.subtitle)
 
-  const isSameWorkTitle = normalizedWorkTitleA === normalizedWorkTitleB
+  const isSameTitle = normalizedTitleA === normalizedTitleB
 
   const isSameSeasonNumber =
     extractedA.season?.number === extractedB.season?.number
@@ -34,42 +34,41 @@ export const compare = (
   const isSameEpisodeNumber =
     extractedA.episode?.number === extractedB.episode?.number
 
-  const isSameSubTitle = normalizedSubTitleA === normalizedSubTitleB
+  const isSameSubtitle = normalizedSubtitleA === normalizedSubtitleB
 
   if (
-    isSameWorkTitle &&
+    isSameTitle &&
     isSameSeasonNumber &&
     isSameEpisodeNumber &&
-    isSameSubTitle
+    isSameSubtitle
   ) {
     return true
   }
 
   if (weak) {
-    const isSimilarWorkTitle =
-      isSameWorkTitle ||
-      0.85 <= similarity(normalizedWorkTitleA, normalizedWorkTitleB)
+    const isSimilarTitle =
+      isSameTitle || 0.85 <= similarity(normalizedTitleA, normalizedTitleB)
 
-    const isSimilarSubTitle =
-      isSameSubTitle ||
-      (!!normalizedSubTitleA &&
-        !!normalizedSubTitleB &&
-        0.9 <= similarity(normalizedSubTitleA, normalizedSubTitleB))
+    const isSimilarSubtitle =
+      isSameSubtitle ||
+      (!!normalizedSubtitleA &&
+        !!normalizedSubtitleB &&
+        0.9 <= similarity(normalizedSubtitleA, normalizedSubtitleB))
 
     if (
-      isSimilarWorkTitle &&
+      isSimilarTitle &&
       isSameSeasonNumber &&
       isSameEpisodeNumber &&
-      isSimilarSubTitle
+      isSimilarSubtitle
     ) {
       return true
     }
 
     if (
-      isSimilarWorkTitle &&
+      isSimilarTitle &&
       extractedA.episode &&
       isSameEpisodeNumber &&
-      (isSameSeasonNumber || isSimilarSubTitle)
+      (isSameSeasonNumber || isSimilarSubtitle)
     ) {
       return true
     }

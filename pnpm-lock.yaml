@@ -11,9 +11,6 @@ importers:
       '@geolonia/japanese-numeral':
         specifier: ^1.0.2
         version: 1.0.2
-      '@google/generative-ai':
-        specifier: ^0.16.0
-        version: 0.16.0
     devDependencies:
       '@jest/globals':
         specifier: ^29.7.0
@@ -198,10 +195,6 @@ packages:
   '@geolonia/japanese-numeral@1.0.2':
     resolution: {integrity: sha512-fOgkPtiewCpdMtQRqbfbR1ebkv4yxNoic0e90GYCdDzScUjrwc3AezpbGuw0sPUJE8HcT2TLZYdp7qpI7TQwHw==}
     engines: {node: '>=14.0.0'}
-
-  '@google/generative-ai@0.16.0':
-    resolution: {integrity: sha512-doB5ZNxS6m+jUZqaLCeYXfBZCdq6Ho0ibkq5/17xe1qAUZpCLWlvCDGtqFPqqO+yezNmvGatS0KhV22yiOT3DA==}
-    engines: {node: '>=18.0.0'}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -1539,8 +1532,6 @@ snapshots:
     optional: true
 
   '@geolonia/japanese-numeral@1.0.2': {}
-
-  '@google/generative-ai@0.16.0': {}
 
   '@isaacs/cliui@8.0.2':
     dependencies:
