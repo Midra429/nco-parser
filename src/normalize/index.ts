@@ -15,7 +15,7 @@ type NromalizeOptions = {
     /** ローマ数字 */
     romanNum?: boolean
     /** 大文字・小文字 */
-    letterCase?: 'upper' | 'lower'
+    letterCase?: 'upper' | 'lower' | false
   }
 
   /**
@@ -69,7 +69,7 @@ export const normalize = (
     str = str.toUpperCase()
   }
   // 小文字
-  else {
+  else if (options.adjust?.letterCase) {
     str = str.toLowerCase()
   }
 
