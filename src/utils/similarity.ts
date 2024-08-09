@@ -35,5 +35,5 @@ export const similarity = (strA: string, strB: string): number => {
     return (maxLength - distance) / maxLength
   }
 
-  return 1.0
+  return 1
 }

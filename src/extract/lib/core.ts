@@ -1,11 +1,9 @@
 import { number2kanji, kanji2number } from '@geolonia/japanese-numeral'
 
-export const NUMBER = /\d/
-export const KANSUJI = /〇一二三四五六七八九十百千万/
-export const REGEXP_NUMBER = new RegExp(
-  `${NUMBER.source}+(?:\\.${NUMBER.source}+)?`
-)
-export const REGEXP_KANSUJI = new RegExp(`[${KANSUJI.source}]+`)
+export const NUMBER = '\\d'
+export const KANSUJI = '〇一二三四五六七八九十百千万'
+export const REGEXP_NUMBER = `${NUMBER}+(?:\\.${NUMBER}+)?`
+export const REGEXP_KANSUJI = `[${KANSUJI}]+`
 
 /**
  * @param str 抽出対象の文字列
@@ -16,8 +14,8 @@ export const core = (str: string, regexps: RegExp[]) => {
     text: string
     number: number
     kansuji: string
-    prefix: string | null
-    suffix: string | null
+    prefix: string
+    suffix: string
     range: [start: number, end: number]
   }[] = []
 
@@ -32,11 +30,11 @@ export const core = (str: string, regexps: RegExp[]) => {
       let number: number | null = null
       let kansuji: string | null = null
 
-      if (REGEXP_NUMBER.test(groups.number)) {
+      if (groups.number) {
         number = Number(groups.number)
         kansuji = number2kanji(number)
-      } else if (REGEXP_KANSUJI.test(groups.number)) {
-        kansuji = groups.number
+      } else if (groups.kansuji) {
+        kansuji = groups.kansuji
         number = kanji2number(kansuji)
       }
 
@@ -45,8 +43,8 @@ export const core = (str: string, regexps: RegExp[]) => {
           text: match[0],
           number,
           kansuji,
-          prefix: groups.prefix || null,
-          suffix: groups.suffix || null,
+          prefix: groups.prefix ?? '',
+          suffix: groups.suffix ?? '',
           range: [indices[0][0], indices[0][1] - 1],
         })
       }

@@ -10,7 +10,7 @@ export const extract = (rawText: string) => {
   })
 
   const seasons = extractSeason(normalized)
-  let episodes = extractEpisode(normalized, false)
+  let episodes = extractEpisode(normalized, true)
 
   let title: string | null = null
   let season: (typeof seasons)[number] | null = null

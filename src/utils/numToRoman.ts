@@ -22,7 +22,7 @@ const DECIMAL_ROMAN_PAIRS = [
  * 1 → 'I'
  * 4 → 'IV'
  */
-export const numToRoman = (num: number, lower: boolean = false): string => {
+export const numToRoman = (num: number, lower?: boolean): string => {
   let result = ''
 
   if (1 <= num && num <= 3999) {

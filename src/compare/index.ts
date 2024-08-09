@@ -5,7 +5,7 @@ import { similarity } from '../utils/similarity.js'
 export const compare = (
   rawTextA: string,
   rawTextB: string,
-  weak: boolean = true
+  strict?: boolean
 ): boolean => {
   if (normalizeAll(rawTextA) === normalizeAll(rawTextB)) {
     return true
@@ -45,7 +45,7 @@ export const compare = (
     return true
   }
 
-  if (weak) {
+  if (!strict) {
     const isSimilarTitle =
       isSameTitle || 0.85 <= similarity(normalizedTitleA, normalizedTitleB)
 

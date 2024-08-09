@@ -10,7 +10,7 @@ export const anime = (str: string): string => {
   }
 
   // <映画タイトル> 本編 <映画タイトル> (dアニメストア)
-  const splited = str.split(/\s+本編\s+/).map((v) => v.trim())
+  const splited = str.split(/\s本編\s/).map((v) => v.trim())
   if (splited.length === 2 && splited[0] === splited[1]) {
     str = splited[0]
   }
