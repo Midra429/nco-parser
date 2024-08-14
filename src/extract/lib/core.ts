@@ -30,13 +30,18 @@ export const core = (str: string, regexps: RegExp[]) => {
       let number: number | null = null
       let kansuji: string | null = null
 
-      if (groups.number) {
-        number = Number(groups.number)
-        kansuji = number2kanji(number)
-      } else if (groups.kansuji) {
-        kansuji = groups.kansuji
-        number = kanji2number(kansuji)
-      }
+      try {
+        if (groups.number) {
+          number = Number(groups.number)
+
+          if (Number.isInteger(number)) {
+            kansuji = number2kanji(number)
+          }
+        } else if (groups.kansuji) {
+          kansuji = groups.kansuji
+          number = kanji2number(kansuji)
+        }
+      } catch {}
 
       if (number !== null && kansuji !== null) {
         matches.push({
