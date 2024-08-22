@@ -10,6 +10,10 @@ type NromalizeOptions = {
     charWidth?: boolean
     /** 空白 */
     space?: boolean
+    /** アルファベット */
+    alphabetic?: boolean
+    /** 数字 */
+    numeric?: boolean
     /** 記号 */
     symbol?: boolean
     /** ローマ数字 */
@@ -52,6 +56,16 @@ export const normalize = (
   // 空白
   if (options.adjust?.space !== false) {
     str = adjust.space(str)
+  }
+
+  // アルファベット
+  if (options.adjust?.alphabetic !== false) {
+    str = adjust.alphabetic(str)
+  }
+
+  // 数字
+  if (options.adjust?.numeric !== false) {
+    str = adjust.numeric(str)
   }
 
   // 記号
