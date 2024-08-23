@@ -45,7 +45,7 @@ export const extract = (rawText: string) => {
     }
 
     if (episodes.length) {
-      episode = episodes.at(-1)!
+      episode = episodes[0]
       title ||= normalized.slice(0, episode.range[0]).trim()
       subtitle = normalized.slice(episode.range[1] + 1).trim()
     }

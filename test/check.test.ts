@@ -75,25 +75,21 @@ describe('check', () => {
       '私がモテないのはどう考えてもお前らが悪い！ 喪1 モテないし、ちょっとイメチェンするわ'
     const TITLE_D =
       'ツンデレ悪役令嬢リーゼロッテと実況の遠藤くんと解説の小林さん chapter 1 ツンデレと王子と天の声'
+    const TITLE_E = 'タイトル Log 03 サブタイトル'
 
-    const extractedA = ncoParser.extract(TITLE_A)
-    const extractedB = ncoParser.extract(TITLE_B)
-    const extractedC = ncoParser.extract(TITLE_C)
-    const extractedD = ncoParser.extract(TITLE_D)
+    const { episode: episodeA } = ncoParser.extract(TITLE_A)
+    const { episode: episodeB } = ncoParser.extract(TITLE_B)
+    const { episode: episodeC } = ncoParser.extract(TITLE_C)
+    const { episode: episodeD } = ncoParser.extract(TITLE_D)
+    const { episode: episodeE } = ncoParser.extract(TITLE_E)
 
     expect(
-      extractedA.episode?.number === extractedB.episode?.number &&
-        extractedA.episode?.number === extractedC.episode?.number &&
-        extractedA.episode?.number === extractedD.episode?.number
+      episodeA?.text === '一占' &&
+        episodeB?.text === '第1羽' &&
+        episodeC?.text === '喪1' &&
+        episodeD?.text === 'chapter 1' &&
+        episodeE?.text === 'Log 03'
     ).toBe(true)
-  })
-
-  test('extract (episode): ATRI', () => {
-    const TITLE = 'ATRI -My Dear Moments- Log 03 「ヒットマン・ザコ・スクール」'
-
-    const extracted = ncoParser.extract(TITLE)
-
-    expect(extracted.episode?.number === 3).toBe(true)
   })
 
   test('extract (season): 魔法科高校の劣等生', () => {
