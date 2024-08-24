@@ -15,7 +15,7 @@ export const REGEXPS = [
   `(?<prefix>シーズン)(?<number>${REGEXP_NUMBER})`,
 
   // season 2
-  `(?<prefix>season\\s?)(?<number>${REGEXP_NUMBER})`,
+  `(?<prefix>season\\s?)(?<number>${REGEXP_NUMBER})(?=\\s|$)`,
 
   // 2nd season
   `(?<number>${REGEXP_NUMBER})(?<suffix>(?:st|nd|rd|th)\\sseason)`,

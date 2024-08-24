@@ -113,23 +113,22 @@ describe('check', () => {
     expect(extractedA.number === extractedB.number).toBe(true)
   })
 
-  test('extract (season2): ヒロアカ7', () => {
+  test('extract: ヒロアカ7', () => {
     const TITLE_A = '僕のヒーローアカデミア　第7期 第144話 DIVISION'
     const TITLE_B = '僕のヒーローアカデミア(第7期)'
 
-    const normalizedA = ncoParser.normalizeAll(TITLE_A, {
-      remove: {
-        space: false,
-      },
-    })
-    const normalizedB = ncoParser.normalizeAll(TITLE_B, {
-      remove: {
-        space: false,
-      },
-    })
+    const extractedA = ncoParser.extract(TITLE_A)
+    const extractedB = ncoParser.extract(TITLE_B)
 
-    const extractedA = ncoParser.extract(normalizedA)
-    const extractedB = ncoParser.extract(normalizedB)
+    expect(extractedA.season?.number === extractedB.season?.number).toBe(true)
+  })
+
+  test('extract: 陰実2', () => {
+    const TITLE_A = '陰の実力者になりたくて！ 2nd season #01「無法都市」'
+    const TITLE_B = '陰の実力者になりたくて！ 2nd season 1話 無法都市'
+
+    const extractedA = ncoParser.extract(TITLE_A)
+    const extractedB = ncoParser.extract(TITLE_B)
 
     expect(extractedA.season?.number === extractedB.season?.number).toBe(true)
   })
