@@ -25,10 +25,10 @@ export const REGEXPS = [
 export const REGEXPS_VAGUE = [
   // <タイトル> (一占 | 第一羽 | 第1憑目 | 喪1) <サブタイトル>
   ...[
-    `(?<prefix>${notNumber}{1,3})(?<number>${REGEXP_NUMBER})(?<suffix>${notNumber}{0,3})`,
-    `(?<prefix>${notNumber}{1,3})(?<kansuji>${REGEXP_KANSUJI})(?<suffix>${notNumber}{0,3})`,
-    `(?<prefix>${notNumber}{0,3})(?<number>${REGEXP_NUMBER})(?<suffix>${notNumber}{1,3})`,
-    `(?<prefix>${notNumber}{0,3})(?<kansuji>${REGEXP_KANSUJI})(?<suffix>${notNumber}{1,3})`,
+    `(?<prefix>${notNumber}{1,5})(?<number>${REGEXP_NUMBER})(?<suffix>${notNumber}{0,3})`,
+    `(?<prefix>${notNumber}{1,5})(?<kansuji>${REGEXP_KANSUJI})(?<suffix>${notNumber}{0,3})`,
+    `(?<prefix>${notNumber}{0,5})(?<number>${REGEXP_NUMBER})(?<suffix>${notNumber}{1,3})`,
+    `(?<prefix>${notNumber}{0,5})(?<kansuji>${REGEXP_KANSUJI})(?<suffix>${notNumber}{1,3})`,
   ].map((v) => `(?<=\\S+\\s)(?<!(?:${notPrefix}))${v}(?=\\s\\S+)`),
 
   // <タイトル> Log 01 <サブタイトル>
