@@ -45,25 +45,25 @@ export const compare = (
     return true
   }
 
+  const isSimilarTitle =
+    isSameTitle || 0.85 <= similarity(normalizedTitleA, normalizedTitleB)
+
+  const isSimilarSubtitle =
+    isSameSubtitle ||
+    (!!normalizedSubtitleA &&
+      !!normalizedSubtitleB &&
+      0.9 <= similarity(normalizedSubtitleA, normalizedSubtitleB))
+
+  if (
+    isSimilarTitle &&
+    isSameSeasonNumber &&
+    isSameEpisodeNumber &&
+    isSimilarSubtitle
+  ) {
+    return true
+  }
+
   if (!strict) {
-    const isSimilarTitle =
-      isSameTitle || 0.85 <= similarity(normalizedTitleA, normalizedTitleB)
-
-    const isSimilarSubtitle =
-      isSameSubtitle ||
-      (!!normalizedSubtitleA &&
-        !!normalizedSubtitleB &&
-        0.9 <= similarity(normalizedSubtitleA, normalizedSubtitleB))
-
-    if (
-      isSimilarTitle &&
-      isSameSeasonNumber &&
-      isSameEpisodeNumber &&
-      isSimilarSubtitle
-    ) {
-      return true
-    }
-
     if (
       isSimilarTitle &&
       extractedA.episode &&
