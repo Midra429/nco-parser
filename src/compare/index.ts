@@ -29,7 +29,9 @@ export const compare = (
   const isSameTitle = normalizedTitleA === normalizedTitleB
 
   const isSameSeasonNumber =
-    extractedA.season?.number === extractedB.season?.number
+    extractedA.season?.number === extractedB.season?.number ||
+    (!extractedA.season && extractedB.season?.number === 1) ||
+    (extractedA.season?.number === 1 && !extractedB.season)
 
   const isSameEpisodeNumber =
     extractedA.episode?.number === extractedB.episode?.number
