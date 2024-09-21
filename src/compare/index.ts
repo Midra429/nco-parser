@@ -54,7 +54,7 @@ export const compare = (
     isSameSubtitle ||
     (!!normalizedSubtitleA &&
       !!normalizedSubtitleB &&
-      0.9 <= similarity(normalizedSubtitleA, normalizedSubtitleB))
+      0.85 <= similarity(normalizedSubtitleA, normalizedSubtitleB))
 
   if (
     isSimilarTitle &&
