@@ -155,4 +155,19 @@ describe('check', () => {
 
     expect(TITLES.every(([a, b]) => ncoParser.compare(a, b))).toBe(true)
   })
+
+  test('ポプテピ2', () => {
+    const TITLE_A =
+      'ポプテピピック TVアニメーション作品第二シリーズ　#3　POPUTAN'
+    const TITLE_B =
+      'ポプテピピック TVアニメ―ション作品第二シリーズ #3「POPUTAN」'
+
+    const extractedA = ncoParser.extract(TITLE_A)
+    const extractedB = ncoParser.extract(TITLE_B)
+
+    expect(
+      extractedA.title === extractedB.title &&
+        extractedA.season?.number === extractedB.season?.number
+    ).toBe(true)
+  })
 })
