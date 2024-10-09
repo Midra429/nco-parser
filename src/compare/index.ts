@@ -1,21 +1,25 @@
+import type { Extracted } from '../extract/index.js'
+
 import { normalizeAll } from '../normalize/index.js'
 import { extract } from '../extract/index.js'
 import { similarity } from '../utils/similarity.js'
 
 export const compare = (
-  rawTextA: string,
-  rawTextB: string,
+  targetA: string | Extracted,
+  targetB: string | Extracted,
   strict?: boolean
 ): boolean => {
-  if (normalizeAll(rawTextA) === normalizeAll(rawTextB)) {
-    return true
-  }
-
-  const extractedA = extract(rawTextA)
-  const extractedB = extract(rawTextB)
+  const extractedA = typeof targetA === 'string' ? extract(targetA) : targetA
+  const extractedB = typeof targetB === 'string' ? extract(targetB) : targetB
 
   if (!extractedA.title || !extractedB.title) {
     return false
+  }
+
+  if (
+    normalizeAll(extractedA.normalized) === normalizeAll(extractedB.normalized)
+  ) {
+    return true
   }
 
   const normalizedTitleA = normalizeAll(extractedA.title)

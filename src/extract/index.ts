@@ -1,8 +1,18 @@
+import type { ExtractResult } from './lib/core.js'
+
 import { normalize } from '../normalize/index.js'
 import { season as extractSeason } from './lib/season.js'
 import { episode as extractEpisode } from './lib/episode.js'
 
-export const extract = (rawText: string) => {
+export type Extracted = {
+  normalized: string
+  title: string | null
+  season: ExtractResult | null
+  episode: ExtractResult | null
+  subtitle: string | null
+}
+
+export const extract = (rawText: string): Extracted => {
   const normalized = normalize(rawText, {
     remove: {
       bracket: true,
