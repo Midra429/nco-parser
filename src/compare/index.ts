@@ -45,8 +45,8 @@ export const compare = (
   if (
     isSameTitle &&
     isSameSeasonNumber &&
-    isSameEpisodeNumber &&
-    isSameSubtitle
+    isSameEpisodeNumber
+    // && isSameSubtitle
   ) {
     return true
   }
