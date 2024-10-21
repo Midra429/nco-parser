@@ -12,14 +12,14 @@ export const compare = (
   const extractedA = typeof targetA === 'string' ? extract(targetA) : targetA
   const extractedB = typeof targetB === 'string' ? extract(targetB) : targetB
 
-  if (!extractedA.title || !extractedB.title) {
-    return false
-  }
-
   if (
     normalizeAll(extractedA.normalized) === normalizeAll(extractedB.normalized)
   ) {
     return true
+  }
+
+  if (!extractedA.title || !extractedB.title) {
+    return false
   }
 
   const normalizedTitleA = normalizeAll(extractedA.title)

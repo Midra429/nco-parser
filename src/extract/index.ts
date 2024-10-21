@@ -29,14 +29,15 @@ export const extract = (rawText: string): Extracted => {
 
   let seasonLastIdx: number | null = null
 
-  if (
-    seasons.length &&
-    seasons.every((v, i, a) => v.number === a.at(i - 1)!.number)
-  ) {
+  if (seasons.length) {
     season = seasons[0]
     title = normalized.slice(0, season.range[0]).trim()
 
-    seasonLastIdx = seasons.at(-1)!.range[1]
+    if (seasons.every((v, i, a) => v.number === a.at(i - 1)!.number)) {
+      seasonLastIdx = seasons.at(-1)!.range[1]
+    } else {
+      seasonLastIdx = seasons[0]!.range[1]
+    }
   }
 
   if (seasonLastIdx) {

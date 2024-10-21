@@ -6,6 +6,9 @@ export const REGEXPS = [
   // 第二期, 三期
   `(?<prefix>第?)(?<kansuji>${REGEXP_KANSUJI})(?<suffix>期)`,
 
+  // 2nd season
+  `(?<number>${REGEXP_NUMBER})(?<suffix>(?:st|nd|rd|th)\\sseason)`,
+
   // 第2シリーズ, 第3シーズン
   `(?<prefix>第)(?<number>${REGEXP_NUMBER})(?<suffix>シリーズ|シーズン)`,
   // 第二シリーズ, 第三シーズン
@@ -16,9 +19,6 @@ export const REGEXPS = [
 
   // season 2
   `(?<prefix>season\\s?)(?<number>${REGEXP_NUMBER})(?=\\s|$)`,
-
-  // 2nd season
-  `(?<number>${REGEXP_NUMBER})(?<suffix>(?:st|nd|rd|th)\\sseason)`,
 ].map((v) => new RegExp(v, 'dgi'))
 
 export const season = (str: string) => core(str, REGEXPS)

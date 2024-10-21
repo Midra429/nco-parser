@@ -1,7 +1,19 @@
 import { NUMBER, KANSUJI, REGEXP_NUMBER, REGEXP_KANSUJI, core } from './core.js'
 
 const notNumber = `[^\\s${NUMBER}${KANSUJI}]`
-const notPrefix = 'season|episode|ep|chapter|part'
+
+const excludePrefixes = ['season', 'episode', 'ep', 'chapter', 'part'].map(
+  (v) => new RegExp(`^${v}(?=\\s|$)`, 'i')
+)
+const excludeSuffixes = [
+  '期',
+  'シリーズ',
+  'シーズン',
+  'st',
+  'nd',
+  'rd',
+  'th',
+].map((v) => new RegExp(`\\s?${v}$`, 'i'))
 
 export const REGEXPS = [
   // 第1話, 2話
@@ -29,20 +41,27 @@ export const REGEXPS_VAGUE = [
     `(?<prefix>${notNumber}{1,10})(?<kansuji>${REGEXP_KANSUJI})(?<suffix>${notNumber}{0,3})`,
     `(?<prefix>${notNumber}{0,10})(?<number>${REGEXP_NUMBER})(?<suffix>${notNumber}{1,3})`,
     `(?<prefix>${notNumber}{0,10})(?<kansuji>${REGEXP_KANSUJI})(?<suffix>${notNumber}{1,3})`,
-  ].map((v) => `(?<=\\S+\\s)(?<!(?:${notPrefix}))${v}(?=\\s\\S+)`),
+  ].map((v) => `(?<=\\S+\\s)${v}(?=\\s\\S+)`),
 
   // <タイトル> Log 01 <サブタイトル>
-  `(?<=\\S+\\s)(?<!(?:${notPrefix}))(?<prefix>[a-z]{2,6}\\s)(?<number>${REGEXP_NUMBER})(?=\\s\\S+)`,
+  `(?<=\\S+\\s)(?<prefix>[a-z]{2,6}\\s)(?<number>${REGEXP_NUMBER})(?=\\s\\S+)`,
 
   // <タイトル> 01 <サブタイトル>
-  `(?<=\\S+)(?<!(?:${notPrefix}))(?:\\s)(?<number>0?[0-9]{2}|[1-9][0-9]{2})(?=\\s\\S+)`,
+  `(?<=\\S+\\s)(?<number>0?[0-9]{2}|[1-9][0-9]{2})(?=\\s\\S+)`,
 ].map((v) => new RegExp(v, 'dgi'))
 
 export const episode = (str: string, strict?: boolean) => {
   const results = core(str, REGEXPS)
 
   if (!strict) {
-    results.push(...core(str, REGEXPS_VAGUE))
+    results.push(
+      ...core(str, REGEXPS_VAGUE).filter(({ prefix, suffix }) => {
+        return (
+          (!prefix || excludePrefixes.every((v) => !v.test(prefix))) &&
+          (!suffix || excludeSuffixes.every((v) => !v.test(suffix)))
+        )
+      })
+    )
   }
 
   results.sort(({ range: a }, { range: b }) => a[0] - b[0] || a[1] - b[1])

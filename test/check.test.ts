@@ -88,7 +88,7 @@ describe('check', () => {
         episodeB?.text === '第1羽' &&
         episodeC?.text === '喪1' &&
         episodeD?.text === 'chapter 1' &&
-        episodeE?.text === 'Log 03'
+        episodeE?.number === 3
     ).toBe(true)
   })
 
@@ -168,6 +168,17 @@ describe('check', () => {
     expect(
       extractedA.title === extractedB.title &&
         extractedA.season?.number === extractedB.season?.number
+    ).toBe(true)
+  })
+
+  test('シャンフロ2', () => {
+    const TITLE =
+      'シャングリラ・フロンティア 2nd Season 26「半裸と愉快な仲間達inゴーレムパラダイス」'
+
+    const extracted = ncoParser.extract(TITLE)
+
+    expect(
+      extracted.season?.number === 2 && extracted.episode?.number === 26
     ).toBe(true)
   })
 })
