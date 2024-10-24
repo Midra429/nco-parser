@@ -172,10 +172,11 @@ describe('check', () => {
   })
 
   test('シャンフロ2', () => {
-    const TITLE =
-      'シャングリラ・フロンティア 2nd Season 26「半裸と愉快な仲間達inゴーレムパラダイス」'
+    const TITLE = 'シャングリラ・フロンティア 2nd Season 27「融通知らずの門番」'
 
     const extracted = ncoParser.extract(TITLE)
+
+    console.log('extracted:', extracted)
 
     expect(
       extracted.season?.number === 2 && extracted.episode?.number === 26

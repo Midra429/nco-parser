@@ -6,6 +6,8 @@ type NromalizeOptions = {
    * @default true
    */
   adjust?: {
+    /** アニメ */
+    anime?: boolean
     /** 全角半角 */
     charWidth?: boolean
     /** 空白 */
@@ -47,6 +49,10 @@ export const normalize = (
   /******************************
    * 正規化
    ******************************/
+  // アニメ
+  if (options.adjust?.anime !== false) {
+    str = adjust.anime(str)
+  }
 
   // 全角半角
   if (options.adjust?.charWidth !== false) {
