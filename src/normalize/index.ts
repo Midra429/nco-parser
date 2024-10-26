@@ -56,7 +56,7 @@ export const normalize = (
 
   // 全角半角
   if (options.adjust?.charWidth !== false) {
-    str = adjust.charWidth(str)
+    str = adjust.charWidth(str, true)
   }
 
   // 空白
